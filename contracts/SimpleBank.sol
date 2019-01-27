@@ -54,7 +54,7 @@ contract SimpleBank {
     // Emit the appropriate event
     function enroll() public returns (bool){
         enrolled[msg.sender] = true;
-        emit logEnrolled(msg.sender);
+        emit LogEnrolled(msg.sender);
         return enrolled[msg.sender];
     }
 
@@ -66,7 +66,7 @@ contract SimpleBank {
     function deposit() public payable returns (uint) {
         /* Add the amount to the user's balance, call the event associated with a deposit,
           then return the balance of the user */
-          required(enrolled[msg.sender], "User must be enrolled first before making a deposit!");
+          require(enrolled[msg.sender], "User must be enrolled first before making a deposit!");
           balances[msg.sender] += msg.value;
           emit LogDepositMade(msg.sender, msg.value);
           return balances[msg.sender];
